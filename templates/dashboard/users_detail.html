@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'list.css' %}">
+
+
+    
+  <div class="student-profile py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card shadow-sm">
+            <div class="card-header bg-transparent text-center">
+              <!-- <img class="profile_img" src="https://source.unsplash.com/600x300/?student" alt="student dp"> -->
+              <h3>{{detail.full_name}}</h3>
+            </div>
+            <div class="card-body">
+              <p class="mb-0"><strong class="pr-1">Student ID:</strong>{{detail.admission_number}}</p>
+              <p class="mb-0"><strong class="pr-1">Class:</strong>{{detail.batch}}</p>
+              <!-- <p class="mb-0"><strong class="pr-1">Section:</strong>A</p> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="card shadow-sm">
+            <div class="card-header bg-transparent border-0">
+              <h3 class="mb-0"><i class="far fa-clone pr-1"></i>General Information</h3>
+            </div>
+            <div class="card-body pt-0">
+              <table class="table table-bordered">
+                <!-- <tr>
+                  <th width="30%"></th>
+                  <td width="2%">:</td>
+                  <td>125</td>
+                </tr> -->
+                <tr>
+                  <th width="30%">Academic Year	</th>
+                  <td width="2%">:</td>
+                  <td>{{detail.academic_year.name}}</td>
+                </tr>
+                <tr>
+                  <th width="30%">Gender</th>
+                  <td width="2%">:</td>
+                  <td>{{detail.gender}}</td>
+                </tr>
+                <tr>
+                  <th width="30%">Date of Birth</th>
+                  <td width="2%">:</td>
+                  <td>{{detail.date_of_birth}}</td>
+                </tr>
+                <tr>
+                  <th width="30%">Parent name</th>
+                  <td width="2%">:</td>
+                  <td>{{detail.parent_name}}</td>
+                </tr>
+                <tr>
+                    <th width="30%">Mobile</th>
+                    <td width="2%">:</td>
+                    <td>{{detail.mobile}}</td>
+                  </tr>
+                  <tr>
+                    <th width="30%">Email</th>
+                    <td width="2%">:</td>
+                    <td>{{detail.email}}</td>
+                  </tr>
+              </table>
+            </div>
+          </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock %}

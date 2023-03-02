@@ -25,7 +25,7 @@
 
   <link rel="preload" href="{% static 'assets/css/theme.min.css' %}" data-hs-appearance="default" as="style">
   <link rel="preload" href="{% static 'assets/css/theme-dark.min.css' %}" data-hs-appearance="dark" as="style">
-
+  <link rel="stylesheet " href="{% static 'style.css' %}">
   <style data-hs-appearance-onload-styles>
     *
     {
@@ -129,7 +129,7 @@
 
   <!-- ========== MAIN CONTENT ========== -->
   <main id="content" role="main" class="main">
-    <div class="position-fixed top-0 end-0 start-0 bg-img-start" style="height: 32rem; background-image: url(assets/svg/components/card-6.svg);">
+    <div class="position-fixed top-0 end-0 start-0 bg-img-start " id="bgimg" style="height: 32rem;  ">
       <!-- Shape -->
       <div class="shape shape-bottom zi-1">
         <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1921 273">
@@ -154,9 +154,11 @@
               {% csrf_token %}
               <div class="text-center">
                 <div class="mb-5">
-                  <h1 class="display-5">Sign in</h1>
+                  <h1 class="display-5">Admin Sign in</h1>
                   <!-- <p>Don't have an account yet? <a class="link" href="authentication-signup-basic.html">Sign up here</a></p> -->
+                  <p class="text-danger">Please login to access this area</p>
                 </div>
+
 
                 <!-- <div class="d-grid mb-4">
                   <a class="btn btn-white btn-lg" href="#">

@@ -1,0 +1,181 @@
+
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="page-header">
+  <div class="row align-items-center">
+    <div class="col">
+    <h1 class="page-header-title">Stores</h1>
+    </div>
+ 
+
+<div class="col-auto">
+  <a class="btn btn-primary" href="javascript:;" data-bs-toggle="modal" data-bs-target="#NewUser">
+    <i class="bi-plus-circle me-1"></i> New Store
+  </a>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="NewUser" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">Create New</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.errors }}
+        <div class="mb-3">
+        <label class="form-label" for="username">Meta_title</label>
+        {{form.meta_title}}
+        </div>
+        
+        <div class="mb-3">
+        <label class="form-label" for="useremail">Description</label>
+        <!-- <input type="email" id="useremail" name="useremail" class="form-control" placeholder="User Email"> -->
+        {{form.meta_description}}
+        </div>
+        
+        <div class="mb-3">
+        <label class="form-label" for="usermobile">Store Logo</label>
+        {{form.store_logo}}
+        </div>
+        
+        <div class="mb-3">
+        <label class="form-label" for="userpassword">Store Name</label>
+        <!-- <input type="text" id="userpassword" name="userpassword" class="form-control" placeholder="John Doe"> -->
+        {{form.store_name}}
+        </div>
+        
+        <div class="mb-3">
+        <label class="form-label" for="useraddress">Address</label>
+        <!-- <input type="text" id="useraddress" name="useraddress" class="form-control" placeholder="John Doe"> -->
+        {{form.address}}
+        </div>
+        
+        <div class="mb-3">
+          <label class="form-label" for="useraddress">Email</label>
+          <!-- <input type="text" id="useraddress" name="useraddress" class="form-control" placeholder="John Doe"> -->
+          {{form.email}}
+          </div>
+        
+          <div class="mb-3">
+            <label class="form-label" for="useraddress">Phone</label>
+            <!-- <input type="text" id="useraddress" name="useraddress" class="form-control" placeholder="John Doe"> -->
+            {{form.phone}}
+            </div>
+     
+      <div class="modal-footer">
+      <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>
+      <button type="submit" name="AddNewUser" class="btn btn-primary">Add</button>
+      </div>
+      </form>
+    </div>
+    </div>
+    </div>
+  </div>
+
+
+
+
+<div class="row justify-content-lg-center mt-5">
+    <div class="col-lg-12">
+        <div class="card">
+          <!-- Header -->
+          <div class="card-header">
+            <div class="row justify-content-between align-items-center flex-grow-1">
+              <div class="col-12 col-md">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="card-header-title">Store</h5>
+                </div>
+              </div>
+
+              <div class="col-auto">
+                <!-- Filter -->
+                <form>
+                  <!-- Search -->
+                  <div class="input-group input-group-merge input-group-flush">
+                    <div class="input-group-prepend input-group-text">
+                      <i class="bi-search"></i>
+                    </div>
+                    <input id="datatableWithSearchInput" type="search" class="form-control" placeholder="Search User" aria-label="Search User">
+                  </div>
+                  <!-- End Search -->
+                </form>
+                <!-- End Filter -->
+              </div>
+            </div>
+
+
+
+            <!-- Table -->
+            <div class="table-responsive datatable-custom">
+            <table class="js-datatable table table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
+                data-hs-datatables-options='{
+                        "order": [],
+                        "search": "#datatableWithSearchInput",
+                        "isResponsive": false,
+                        "isShowPaging": true,
+                        "pagination": "datatablePagination"
+                        }'>
+            <thead class="thead-light">
+            <tr class="text-center">
+                <th>Meta Title</th>
+                <th>Meta Tag Description</th>
+                <th>Store Logo</th>
+                <th>Store Name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Telephone</th>
+            </thead>
+
+            <tbody>
+               {% for items in store %}                     
+            <tr class="text-center">
+                <td>{{items.meta_title}}</td>
+                <td>{{items.meta_description}}</td>
+                <td><img class="avatar-img" src="{{items.store_logo.url}}" alt=""></td>
+                <td class="text-center">
+                    <a class="d-flex justify-content-center" href="user-view.php?user=1">
+                    <div class="d-block fs-5 text-body">
+                        {{items.store_name}}
+                    </div>
+                    <div class="ms-3">
+                        <!-- <span class="d-block fs-5 text-inherit mb-0">Web Admin </span> -->
+                        
+                    </div>
+                    </a>
+                </td>
+                
+                <td><span class="d-block fs-5 text-body"></span>{{items.address}}</td>
+                <td>{{items.email}}</td>
+                
+                
+                <td class="text-center">
+                    <div class="btn-group" role="group">
+                         {{items.phone}}
+                    </div>	
+                </td>
+            </tr>
+            {% endfor %}     
+            
+            
+          </tbody>
+
+        </table>
+        </div>
+
+
+        </div>
+        </div>
+      </div>
+  </div>
+        
+            
+
+
+
+{% endblock %}

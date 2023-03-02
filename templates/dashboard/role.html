@@ -1,0 +1,206 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="row justify-content-lg-center">
+    <div class="col-lg-12">
+        <div class="card">
+          <!-- Header -->
+          <div class="card-header">
+            <div class="row justify-content-between align-items-center flex-grow-1">
+              <div class="col-12 col-md">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="card-header-title">Roles</h5>
+                </div>
+              </div>
+              <div class="col-auto">
+                <a class="btn btn-primary" href="javascript:" data-bs-toggle="modal" data-bs-target="#addRole">
+                    <i class="bi-person-plus-fill me-1"></i> Add Role
+                </a>
+            </div>
+                <!-- Modal -->
+                <div class="modal fade" id="addRole" data-bs-backdrop="static" tabindex="-1" role="dialog"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+               <div class="modal-dialog" role="document">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                           <h5 class="modal-title" id="staticBackdropLabel">Add New Role</h5>
+                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                       </div>
+                       <div class="modal-body">
+                           <form method="post">
+                               {% csrf_token %}
+                               {% if form.non_field_errors %}
+                                   <div class="alert alert-danger" role="alert">
+                                       {% for error in form.non_field_errors %}
+                                           {{ error }}
+                                       {% endfor %}
+                                   </div>
+                               {% endif %}
+   
+                               <div class="mb-3">
+                                   <label class="form-label" for="id_title">Role title</label>
+                                   {{ form.name }}
+                                   {% for error in form.name.errors %}
+                                       <span class="invalid-feedback">{{ error }}</span>
+                                   {% endfor %}
+                               </div>
+   
+                               <div class="mb-3">
+                                   <label class="form-label" for="exampleFormControlInput1">Role Permission</label>
+                                   <!-- Checkbox -->
+                                   <div class="form-check mb-3">
+                                       {{ form.order }}
+                                       <label class="form-check-label" for="id_accounts">Order</label>
+                                   </div>
+                                   <!-- End Checkbox -->
+   
+                                   <!-- Checkbox -->
+                                   <div class="form-check mb-3">
+                                       {{ form.catolog}}
+                                       <label class="form-check-label" for="id_hr">Catolog</label>
+                                   </div>
+                                   <!-- End Checkbox -->
+   
+                                   <!-- Checkbox -->
+                                   <div class="form-check mb-3">
+                                       {{ form.pages }}
+                                       <label class="form-check-label" for="id_purchase">Pages</label>
+                                   </div>
+   
+                                   <!-- Checkbox -->
+                                   <div class="form-check mb-3">
+                                       {{ form.subscribers_list }}
+                                       <label class="form-check-label" for="id_sales">Subscribers_list</label>
+                                   </div>
+                                   <!-- End Checkbox -->
+   
+   
+                                   <!-- Checkbox -->
+                                   <div class="form-check mb-3">
+                                       {{ form.report }}
+                                       <label class="form-check-label" for="id_work_site">Report</label>
+                                   </div>
+                                   <!-- End Checkbox -->
+                                   <!-- <div class="row mx-3">
+                                       {% for worksite in form.work_sites %}
+                                           <div class="col-4">
+                                               <!-- Checkbox -->
+                                               <!-- <div class="form-check mb-3">
+                                                   {{ worksite }}
+                                                   <label class="form-check-label"
+                                                          for="id_work_site{{ forloop.counter0 }}">Site 1</label>
+                                               </div> -->
+                                               <!-- End Checkbox -->
+                                           </div> 
+                                       {% endfor %}
+   
+                                   </div>
+                                   <!-- Checkbox -->
+                                   <!-- <div class="form-check mb-3">
+   
+                                       {{ form.report }}
+                                       <label class="form-check-label" for="id_report">Report</label>
+                                   </div> -->
+                                   <!-- End Checkbox -->
+                               </div>
+   
+                       </div>
+                       <div class="modal-footer">
+                           <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>
+                           <button type="submit" class="btn btn-primary">Create Role</button>
+                       </div>
+                       </form>
+                   </div>
+               </div>
+           </div>
+           <!-- End Modal -->
+       </div>
+              
+            </div>
+
+
+
+            <!-- Table -->
+            <div class="table-responsive datatable-custom">
+            <table class="js-datatable table table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
+                data-hs-datatables-options='{
+                        "order": [],
+                        "search": "#datatableWithSearchInput",
+                        "isResponsive": false,
+                        "isShowPaging": true,
+                        "pagination": "datatablePagination"
+                        }'>
+            <thead class="thead-light">
+            <tr class="text-center">
+                <th>ID</th>
+                <th>Name</th>
+                <th>Created</th>
+                <th>Action</th>
+                
+            </thead>
+
+            <tbody>
+               {% for item in roles %}                     
+            <tr class="text-center">
+                <td>{{item.id}}</td>
+                <td class="text-center">
+                    <a class="d-flex justify-content-center" href="user-view.php?user=1">
+                    <div class="avatar avatar-circle">
+                        <!-- <img class="avatar-img" src="../uploads/user.webp" alt="Image Description"> -->
+                    </div>
+                    <div class="ms-3">
+                        <span class="d-block fs-5 text-inherit mb-0">{{item.name}} </span>
+                        
+                    </div>
+                    </a>
+                </td>
+                
+                 <td><span class="d-block fs-5 text-body">{{item.created}}</span></td> 
+                
+                
+                
+                <td class="text-center">
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-white btn-sm" href="#">
+                        <i class="bi-pencil-fill me-1"></i> Edit
+                        </a>
+
+                        <!-- Button Group -->
+                        <div class="btn-group">
+                        <button type="button" class="btn btn-white btn-icon btn-sm dropdown-toggle dropdown-toggle-empty" id="productsEditDropdown8" data-bs-toggle="dropdown" aria-expanded="false"></button>
+
+                        <div class="dropdown-menu dropdown-menu-end mt-1" aria-labelledby="productsEditDropdown8">
+                            <a class="dropdown-item" href="#">
+                            <i class="bi-eye dropdown-item-icon"></i> View
+                            </a>
+                            <a class="dropdown-item" href="#">
+                            <i class="bi-fingerprint dropdown-item-icon"></i> Reset Password
+                            </a>
+                            <a class="dropdown-item" href="#">
+                            <i class="bi-lock dropdown-item-icon"></i> Suspend User
+                            </a>
+                        </div>
+                        </div>
+                        <!-- End Button Group -->
+                    </div>	
+                </td>
+            </tr>
+           {% endfor %}                         
+          </tbody>
+
+        </table>
+        </div>
+
+
+        </div>
+        </div>
+      </div>
+  </div>
+        
+
+
+{% endblock %}
+
+
