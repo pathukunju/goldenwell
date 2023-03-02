@@ -107,7 +107,7 @@ def local(request):
        
         form= LocalForm()
 
-        return render(request,'dashboard/settings_local.html',{'items':items})
+        return render(request,'dashboard/settings_local.html',{'items':items,'form':form})
 
 def server(request):
         return render(request,'dashboard/settings_server.html')
